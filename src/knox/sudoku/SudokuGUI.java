@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collection;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -51,7 +52,13 @@ public class SudokuGUI extends JFrame {
     // the current row and column we are potentially putting values into
     private int currentRow = -1;
     private int currentCol = -1;
+    
+ // hint row and hint col
+    private int hintRow = -1;
+    private int hintCol = -1;
 
+    // show all legal values
+    private boolean showLegalValues = false;
     
     // figuring out how big to make each button
     // honestly not sure how much detail is needed here with margins
