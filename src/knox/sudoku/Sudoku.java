@@ -151,6 +151,17 @@ etc
 		}
 		return true;
 	}
+	
+	public boolean gameEnd() {
+		if (!gameOver()) return false;
+		for (int r = 0; r < 9; r++) {
+			for (int c = 0; c < 9; c++) {
+				if (!isLegal(r, c, board[r][c])) return false;
+			}
+		}
+		
+		return true;
+	}
 
 	public boolean isBlank(int row, int col) {
 		return board[row][col] == 0;
