@@ -156,14 +156,18 @@ public class SudokuGUI extends JFrame {
     private void update() {
     	for (int row=0; row<numRows; row++) {
     		for (int col=0; col<numCols; col++) {
-    			if (row == currentRow && col == currentCol && sudoku.isBlank(row, col)) {
+    			if (hintRow == row && hintCol == col) {
+    				buttons[row][col].setBackground(Color.pink);
+    				setText(row, col, "");
+    			} else if (row == currentRow && col == currentCol && sudoku.isBlank(row, col)) {
     				// draw this grid square special!
     				// this is the grid square we are trying to enter value into
     				buttons[row][col].setForeground(Color.RED);
-    				// I can't figure out how to change the background color of a grid square, ugh
-    				// Maybe I should have used JLabel instead of JButton?
-    				buttons[row][col].setBackground(Color.CYAN);
     				setText(row, col, "_");
+    				if (showLegalValues) {
+    					Collection<Integer> legals = sudoku.getLegalValues(row, col);
+    					JOptionPane.showMessageDialog(null, legals.toString());
+    					}
     			} else {
     				buttons[row][col].setForeground(FONT_COLOR);
     				buttons[row][col].setBackground(BACKGROUND_COLOR);
@@ -177,6 +181,10 @@ public class SudokuGUI extends JFrame {
     		}
     	}
     	repaint();
+    	// Message if you win the game
+    	if (sudoku.gameEnd()) {
+    		JOptionPane.showMessageDialog(null, "Your intelligence is unparalled");
+    	}
     }
     
 	
@@ -243,6 +251,15 @@ public class SudokuGUI extends JFrame {
 						"which is the square where the fewest posssible values can go");
 			}
 		});
+        
+        JMenu menuItem1 = new JMenu("Riddle...?");
+        help.add(menuItem1);
+        menuItem1.addItemListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		JOptionPane.showMessageDialog(null,  "How many licks does it take to get to the center of a tootsie pop?");
+        	}
+        });
         
         this.setJMenuBar(menuBar);
     }
