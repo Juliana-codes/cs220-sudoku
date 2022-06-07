@@ -254,14 +254,24 @@ public class SudokuGUI extends JFrame {
         addToMenu(help, "Hint", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				for (int r = 0; r < 9; r++) {
+					for (int c = 0; c < 9; c++) {
+						if (sudoku.isBlank(r, c) && sudoku.getLegalValues(r, c).size() == 1) {
+							hintRow = r;
+							hintCol = c;
+							update();
+							return;
+        }
+					}
+				}
 				JOptionPane.showMessageDialog(null, "Give the user a hint! Highlight the most constrained square\n" + 
 						"which is the square where the fewest posssible values can go");
 			}
 		});
         
-        JMenu menuItem1 = new JMenu("Riddle...?");
-        help.add(menuItem1);
-        menuItem1.addItemListener(new ActionListener() {
+        JMenu riddle = new JMenu("Riddle...?");
+        menuBar.add(riddle);
+        addToMenu(riddle, "Riddle... ?", new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		JOptionPane.showMessageDialog(null,  "How many licks does it take to get to the center of a tootsie pop?");
