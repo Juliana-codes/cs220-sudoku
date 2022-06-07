@@ -190,7 +190,7 @@ public class SudokuGUI extends JFrame {
     	repaint();
     	// Message if you win the game
     	if (sudoku.gameEnd()) {
-    		JOptionPane.showMessageDialog(null, "Your intelligence is unparalled");
+    		JOptionPane.showMessageDialog(null, "Your intelligence is unparalled -Kit");
     	}
     }
     
